@@ -1,4 +1,8 @@
 import { useState } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Homepage } from './pages/Homepage'
+import { TaskList } from './pages/TaskList'
+import { AddTask } from './pages/AddTask'
 
 import './App.css'
 
@@ -9,9 +13,9 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route>
-            <p>...</p>
-          </Route>
+          <Route path="/" element={<Homepage />}></Route>
+          <Route path="/TaskList" element={<TaskList />}></Route>
+          <Route path="/AddTask" element={<AddTask />}></Route>
         </Routes>
       </BrowserRouter>
     </>
