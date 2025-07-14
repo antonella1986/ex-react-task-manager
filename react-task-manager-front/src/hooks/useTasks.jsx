@@ -34,5 +34,6 @@ export function useTasks() {
         setTasks(tasks.map(task => task.id === taskId ? updatedTask : task));
     }
 
+    //queste funzioni sono contenute dentro tasksData associato all'hook useTasks dentro il contesto
     return { tasks, setTasks, addTask, removeTask, updateTask };
 }
