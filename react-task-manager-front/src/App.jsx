@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { GlobalProvider } from './contexts/GlobalContext'
 
 import { Homepage } from './pages/Homepage'
 import { TaskList } from './pages/TaskList'
@@ -11,13 +12,15 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Homepage />}></Route>
-          <Route path="/TaskList" element={<TaskList />}></Route>
-          <Route path="/AddTask" element={<AddTask />}></Route>
-        </Routes>
-      </BrowserRouter>
+      <GlobalProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Homepage />}></Route>
+            <Route path="/TaskList" element={<TaskList />}></Route>
+            <Route path="/AddTask" element={<AddTask />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </GlobalProvider>
     </>
   )
 }
