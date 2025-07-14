@@ -2,6 +2,8 @@ import { NavLink } from "react-router-dom";
 import { GlobalContext } from "../contexts/GlobalContext";
 import { useContext } from "react";
 
+import { TaskRow } from "../components/TaskRow";
+
 export function TaskList() {
     const { tasks } = useContext(GlobalContext);
 
@@ -18,16 +20,8 @@ export function TaskList() {
                     </tr>
                 </thead>
                 <tbody>
-                    {tasks.map(task => (
-                        <tr key={task.id}>
-                            <td>{task.title}</td>
-                            <td>{task.status}</td>
-                            <td>{new Date(task.createdAt).toLocaleDateString('it-IT', {
-                                day: '2-digit',
-                                month: '2-digit',
-                                year: 'numeric'
-                            })}</td>
-                        </tr>
+                    {tasks.map((task) => (
+                        <TaskRow key={task.id} task={task} />
                     ))}
                 </tbody>
             </table>
