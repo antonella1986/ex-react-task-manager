@@ -7,7 +7,7 @@ import { TaskRow } from "../components/TaskRow";
 
 export function TaskList() {
     //prendo l'array di tutti i task dal file GlobalContext e li rendo leggibili e utilizzabili nel componente tramite useContext
-    //se stampo tasks, vedo un array di oggetti (id, title...)
+    //se stampo, vedo un array di oggetti (id, title...)
     const { tasks } = useContext(GlobalContext);
 
     return (
