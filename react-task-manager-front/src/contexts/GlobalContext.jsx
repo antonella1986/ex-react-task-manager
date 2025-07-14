@@ -1,23 +1,15 @@
 import { createContext, useEffect, useState } from "react";
+import { useTasks } from "../hooks/useTasks";
 
 const GlobalContext = createContext();
 
 const GlobalProvider = ({ children }) => {
-    const [tasks, setTasks] = useState([]);
-
-    useEffect(() => {
-        fetchTasks();
-    }, []);
-
-    async function fetchTasks() {
-        const response = await fetch ("http://localhost:3001/tasks");
-        const data = await response.json();
-        setTasks(data);
-        console.log(data);
-    }
+    const tasksData = useTasks();
 
     return (
-        <GlobalContext.Provider value={{ tasks, setTasks }}>{children}</GlobalContext.Provider>
+        <GlobalContext.Provider value={{ tasksData }}>
+            {children}
+        </GlobalContext.Provider>
     );
 };
 
