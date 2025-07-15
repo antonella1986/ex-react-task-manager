@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { GlobalContext } from "../contexts/GlobalContext"
 import { Modal } from "../components/Modal"
 
@@ -14,6 +14,17 @@ export function TaskDetail() {
     //accedo alla funzione removeTask che si trova nel contesto
     const { removeTask } = useContext(GlobalContext);
     const [showModal, setShowModal] = useState(false);
+    
+    if (!task) return <p>Task non trovato</p>;
+
+    let statusColor = "";
+    if (task.status === "To do") {
+        statusColor = "red";
+    } else if (task.status === "Doing") {
+        statusColor = "yellow";
+    } else {
+        statusColor = "green";
+    }
 
     const handleDelete = async () => {
         try {
@@ -26,7 +37,6 @@ export function TaskDetail() {
         }
     }
 
-    if (!task) return <p>Task non trovato</p>;
 
     return (
         <div>
@@ -35,13 +45,13 @@ export function TaskDetail() {
             <h4>Descrizione</h4>
             <p>{task.description}</p>
             <h4>Status</h4>
-            <p>{task.status}</p>
+            <p style={{ color: statusColor }}>{task.status}</p>
             <h4>Data di creazione</h4>
-            <p>{(task.createdAt).toLocaleDateString('it-IT', {
+            <p>{new Date(task.createdAt).toLocaleDateString('it-IT', {
                 day: '2-digit',
                 month: '2-digit',
                 year: 'numeric'
-                })}</p>
+            })}</p>
             <button onClick={() => setShowModal(true)}>Elimina task</button>
             <Modal
                 show={showModal}
