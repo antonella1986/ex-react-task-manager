@@ -37,7 +37,11 @@ export function TaskDetail() {
             <h4>Status</h4>
             <p>{task.status}</p>
             <h4>Data di creazione</h4>
-            <p>{task.createdAt}</p>
+            <p>{(task.createdAt).toLocaleDateString('it-IT', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+                })}</p>
             <button onClick={() => setShowModal(true)}>Elimina task</button>
             <Modal
                 show={showModal}
