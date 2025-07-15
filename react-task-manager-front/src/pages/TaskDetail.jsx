@@ -1,14 +1,30 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useContext } from "react"
 import { GlobalContext } from "../contexts/GlobalContext"
 
-export function TaskDetail({ task }) {
+export function TaskDetail() {
     //useParams mi fornisce l'id del task
     const { id } = useParams()
+    const navigate = useNavigate()
     //accedo a tutti i task (da cui cercare il task voluto)
     const { tasks } = useContext(GlobalContext)
     //cerco il task giusto grazie all'id ottenuto da useParams
     const task = tasks.find(t => t.id.toString() === id)
+    //accedo alla funzione removeTask che si trova nel contesto
+    const { removeTask } = useContext(GlobalContext);
+
+    const handleDelete = async () => {
+        try {
+            //"aspetta che io comunichi con il backend e cancelli il task con questo id (rispondendo al frontend { success: true }). Dopo il frontend aggiorna lo stato locale con setTasks(). Completato questo con successo, passo alla riga successiva."
+            await removeTask(task.id)
+            alert("Task eliminato")
+            navigate("/TaskList")
+        } catch (error) {
+            alert("Errore nella rimozione del task" + error.message)
+        }
+    }
+
+    if (!task) return <p>Task non trovato</p>;
 
     return (
         <div>
@@ -20,7 +36,7 @@ export function TaskDetail({ task }) {
             <p>{task.status}</p>
             <h4>Data di creazione</h4>
             <p>{task.createdAt}</p>
-            <button>Elimina task</button>
+            <button onClick={handleDelete}>Elimina task</button>
         </div>
     )
 }

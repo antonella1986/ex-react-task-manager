@@ -43,9 +43,26 @@ export function useTasks() {
         }
     };
 
-    const removeTask = (taskId) => {
-        setTasks(tasks.filter(task => task.id !== taskId));
-    }
+    async function removeTask(id) {
+        try {
+            const response = await fetch(`http://localhost:3001/tasks/${id}`, {
+                method: "DELETE"
+            });
+            //ricevo la risposta e la converto in JSON
+            //result conterrà un oggetto con due proprietà: success: true e task: { id: x, title: y...}
+            const result = await response.json();
+
+            if (result.success) {
+                //aggiorno lo stato dei task rimuovendo quello selezionato da quelli già esistenti
+                setTasks(tasks => tasks.filter(task => task.id !== id));
+            } else {
+                throw new Error(result.message || "Errore sconosciuto");
+            }
+        } catch (error) {
+            //errore nel fetch (es. connessione) o errore lanciato sopra
+            throw new Error(error.message || "Errore nella rimozione del task");
+        }
+    };
 
     const updateTask = (taskId, updatedTask) => {
         setTasks(tasks.map(task => task.id === taskId ? updatedTask : task));

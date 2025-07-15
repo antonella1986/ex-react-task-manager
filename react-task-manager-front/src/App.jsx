@@ -19,7 +19,7 @@ function App() {
             <Route path="/" element={<Homepage />}></Route>
             <Route path="/TaskList" element={<TaskList />}></Route>
             <Route path="/AddTask" element={<AddTask />}></Route>
-            <Route path="/TaskDetail" element={<TaskDetail />}></Route>
+            <Route path="/task/:id" element={<TaskDetail />} />
           </Routes>
         </BrowserRouter>
       </GlobalProvider>
