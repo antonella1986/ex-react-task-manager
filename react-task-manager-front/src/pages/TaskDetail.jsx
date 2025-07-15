@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams, NavLink } from "react-router-dom"
 import { useContext, useState } from "react"
 import { GlobalContext } from "../contexts/GlobalContext"
 import { Modal } from "../components/Modal"
@@ -14,7 +14,7 @@ export function TaskDetail() {
     //accedo alla funzione removeTask che si trova nel contesto
     const { removeTask } = useContext(GlobalContext);
     const [showModal, setShowModal] = useState(false);
-    
+
     if (!task) return <p>Task non trovato</p>;
 
     let statusColor = "";
@@ -40,6 +40,7 @@ export function TaskDetail() {
 
     return (
         <div>
+            <NavLink to="/"><h1>Homepage</h1></NavLink>
             <h3>Nome</h3>
             <p>{task.title}</p>
             <h4>Descrizione</h4>
