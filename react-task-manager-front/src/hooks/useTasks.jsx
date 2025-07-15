@@ -14,17 +14,34 @@ export function useTasks() {
         fetchTasks();
     }, []);
 
-    const addTask = () => {
-        const newTask = {
-            id: Date.now(),
-            title: "Nuovo task",
-            description: "Descrizione del nuovo task",
-            status: "todo",
-            createdAt: new Date().toISOString(),
-        };
-        //aggiorno lo stato tasks aggiungendo newTask alla fine dell'array esistente
-        setTasks([...tasks, newTask]);
-    }
+    //questa funzione riceverà un oggetto chiamato newTask perché lo userò all'interno della funzione stessa
+    async function addTask(newTask) {
+        try {
+            const response = await fetch("http://localhost:3001/tasks", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                //converto l'oggetto JS newTask in JSON da mandare nel body
+                body: JSON.stringify(newTask),
+            });
+            //ricevo la risposta e la converto in JSON
+            //result conterrà un oggetto con due proprietà: success: true e task: { id: x, title: y...}
+            const result = await response.json();
+
+            if (result.success) {
+                //aggiorno lo stato dei task aggiungendo quello nuovo a quelli già esistenti
+                //prevTasks è una fotografia aggiornata dell'array corrente dei task
+                setTasks(prevTasks => [...prevTasks, result.task]);
+            } else {
+                //l'API ha risposto, ma con errore (es. validazione)
+                throw new Error(result.message || "Errore sconosciuto");
+            }
+        } catch (error) {
+            //errore nel fetch (es. connessione) o errore lanciato sopra
+            throw new Error(error.message || "Errore nell'aggiunta del task");
+        }
+    };
 
     const removeTask = (taskId) => {
         setTasks(tasks.filter(task => task.id !== taskId));
