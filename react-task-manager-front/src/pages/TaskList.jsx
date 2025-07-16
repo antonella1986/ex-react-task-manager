@@ -1,14 +1,26 @@
 import { NavLink } from "react-router-dom";
-import { GlobalContext } from "../contexts/GlobalContext";
 //importo l'hook useContext per leggere il valore del contesto (l'elenco dei task)
 import { useContext } from "react";
 
+import { GlobalContext } from "../contexts/GlobalContext";
 import { TaskRow } from "../components/TaskRow";
 
 export function TaskList() {
     //prendo l'array di tutti i task dal file GlobalContext e li rendo leggibili e utilizzabili nel componente tramite useContext
     //se stampo, vedo un array di oggetti (id, title...)
     const { tasks } = useContext(GlobalContext);
+
+    const [sortBy, setSortBy] = useState('createdAt');
+    const [sortOrder, setSortOrder] = useState('1');
+
+    function handleSort(column) {
+        if (sortBy === column) {
+            setSortOrder(sortOrder === '1' ? '-1' : '1');
+        } else {
+            setSortBy(column);
+            setSortOrder('1');
+        }
+    }
 
     return (
         <div>
@@ -17,9 +29,9 @@ export function TaskList() {
             <table>
                 <thead>
                     <tr>
-                        <th>Nome</th>
-                        <th>Stato</th>
-                        <th>Data di creazione</th>
+                        <th onClick={() => handleSort('title')}>Nome</th>
+                        <th onClick={() => handleSort('status')}>Stato</th>
+                        <th onClick={() => handleSort('createdAt')}>Data di creazione</th>
                     </tr>
                 </thead>
                 <tbody>
