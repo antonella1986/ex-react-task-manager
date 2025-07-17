@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
+import { debounce } from "lodash";
 
 export function useTasks() {
     const [ tasks, setTasks ] = useState([]);
@@ -76,7 +77,17 @@ export function useTasks() {
         );
     }, [tasks, query]);
 
+    const debounceSearch = useCallback(() => {
+        let timeout;
+        return (value) => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                setQuery(value);
+            }, 1000);
+        };
+    }, [])();
+    
 
     //queste funzioni sono contenute dentro tasksData associato all'hook useTasks dentro il contesto
-    return { tasks, setTasks, addTask, removeTask, filteredTask, query, setQuery };
+    return { tasks, setTasks, addTask, removeTask, filteredTask, query, setQuery, debounceSearch };
 }
