@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 export function useTasks() {
     const [ tasks, setTasks ] = useState([]);
+    const [ query, setQuery ] = useState("");
+    const [ filteredTasks, setFilteredTasks ] = useState([]);
 
     useEffect(() => {
         async function fetchTasks() {
@@ -64,10 +66,17 @@ export function useTasks() {
         }
     };
 
-    const updateTask = (taskId, updatedTask) => {
+/*  const updateTask = (taskId, updatedTask) => {
         setTasks(tasks.map(task => task.id === taskId ? updatedTask : task));
-    }
+    } */
+
+    const filteredTask = useMemo(() => {
+        return tasks.filter(task =>
+            task.title.toLowerCase().includes(query.toLowerCase())
+        );
+    }, [tasks, query]);
+
 
     //queste funzioni sono contenute dentro tasksData associato all'hook useTasks dentro il contesto
-    return { tasks, setTasks, addTask, removeTask, updateTask };
+    return { tasks, setTasks, addTask, removeTask, filteredTask, query, setQuery };
 }

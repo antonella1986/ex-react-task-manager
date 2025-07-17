@@ -4,11 +4,12 @@ import { useContext, useState, useMemo } from "react";
 
 import { GlobalContext } from "../contexts/GlobalContext";
 import { TaskRow } from "../components/TaskRow";
+import { SearchBar } from "../components/SearchBar";
 
 export function TaskList() {
     //prendo l'array di tutti i task dal file GlobalContext e li rendo leggibili e utilizzabili nel componente tramite useContext
     //se stampo, vedo un array di oggetti (id, title...)
-    const { tasks } = useContext(GlobalContext);
+    const { tasks, filteredTask } = useContext(GlobalContext);
 
     const [sortBy, setSortBy] = useState('createdAt');
     const [sortOrder, setSortOrder] = useState(1);
@@ -73,6 +74,8 @@ export function TaskList() {
         <div>
             <NavLink to="/">Homepage</NavLink>
             <h1>Task list</h1>
+            <h2>Cerca un task</h2>
+            <SearchBar />
             <table>
                 <thead>
                     <tr>
@@ -83,9 +86,9 @@ export function TaskList() {
                     </tr>
                 </thead>
                 <tbody>
-                    {tasks.map((task) => (
+                    {filteredTask.map(task =>
                         <TaskRow key={task.id} task={task} />
-                    ))}
+                    )}
                 </tbody>
             </table>
         </div>
