@@ -4,16 +4,19 @@ import { GlobalContext } from "../contexts/GlobalContext";
 
 export function AddTask() {
     //prendo la funzione addTask dal contesto globale, il quale ha il link per la sua logica nell'hook useTasks
+    //ho già eseguito useTasks() una sola volta nel contesto, non ha senso rieseguirlo nei componenti figli: prendono direttamente dal contesto quello che serve
     const { addTask } = useContext(GlobalContext);
 
+    //questi due creano due oggetti { current: null }
+    //descriptionRef e statusRef sono collegati ai rispettivi input tramite la proprietà ref=, così React può accedere a .current e leggere il valore degli input stessi
     const descriptionRef = useRef(null);
     const statusRef = useRef(null);
     const [title, setTitle] = useState('');
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        const description = descriptionRef.current.value;
-        const status = statusRef.current.value;
+        let description = descriptionRef.current.value;
+        let status = statusRef.current.value;
         const symbols = /[!@#$%^&*()\-=+[\]{}|;:'\\]"?/;
 
         if (!title) {

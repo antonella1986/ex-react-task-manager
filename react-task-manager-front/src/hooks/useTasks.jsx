@@ -1,10 +1,9 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { debounce } from "lodash";
 
 export function useTasks() {
     const [ tasks, setTasks ] = useState([]);
     const [ query, setQuery ] = useState("");
-    const [ filteredTasks, setFilteredTasks ] = useState([]);
 
     useEffect(() => {
         async function fetchTasks() {
@@ -17,6 +16,7 @@ export function useTasks() {
         fetchTasks();
     }, []);
 
+    //FUNZIONE PER AGGIUNGERE I TASK
     //questa funzione riceverà un oggetto chiamato newTask perché lo userò all'interno della funzione stessa
     async function addTask(newTask) {
         try {
@@ -46,6 +46,7 @@ export function useTasks() {
         }
     };
 
+    //FUNZIONE PER RIMUOVERE I TASK
     async function removeTask(id) {
         try {
             const response = await fetch(`http://localhost:3001/tasks/${id}`, {
@@ -66,28 +67,41 @@ export function useTasks() {
             throw new Error(error.message || "Errore nella rimozione del task");
         }
     };
-
-/*  const updateTask = (taskId, updatedTask) => {
-        setTasks(tasks.map(task => task.id === taskId ? updatedTask : task));
-    } */
-
+    
+    //FUNZIONE PER FILTRARE I TASK IN BASE A IL TESTO DIGITATO NELLA RICERCA
     const filteredTask = useMemo(() => {
         return tasks.filter(task =>
             task.title.toLowerCase().includes(query.toLowerCase())
         );
     }, [tasks, query]);
 
-    const debounceSearch = useCallback(() => {
-        let timeout;
-        return (value) => {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => {
-                setQuery(value);
-            }, 1000);
-        };
-    }, [])();
-    
+    //FUNZIONE DEBOUNCE LEGATA AL FILTRAGGIO TASK
+    //useCallback: per evitare che debounce venga ricreata ogni volta che viene digitato qualcosa
+    const debounceSearch = useCallback(
+        //value è ciò che l'utente scrive sul campo di ricerca. funzione: primo argomento di useCallback
+        //dopo 1 secondo dalla digitazione...
+        debounce((value) => {
+            //...viene chiamata setQuery che aggiorna lo stato query con il testo digitato dall'utente (tecnicamente è la chiamata a setQuery che provoca un nuovo render)
+            setQuery(value);
+        }, 1000),
+    //secondo argomento di useCallback
+    []);
 
     //queste funzioni sono contenute dentro tasksData associato all'hook useTasks dentro il contesto
     return { tasks, setTasks, addTask, removeTask, filteredTask, query, setQuery, debounceSearch };
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/*  const updateTask = (taskId, updatedTask) => {
+        setTasks(tasks.map(task => task.id === taskId ? updatedTask : task));
+    } */
