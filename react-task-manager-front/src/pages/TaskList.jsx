@@ -10,7 +10,9 @@ export function TaskList() {
     //se stampo, vedo un array di oggetti (id, title...)
     const { filteredTask } = useContext(GlobalContext);
 
+    //sortBy corrisponde all'elemento attualmente cliccato
     const [sortBy, setSortBy] = useState('createdAt');
+    //sortOrder corrisponde all'ordine: 1 = crescente, -1 = decrescente
     const [sortOrder, setSortOrder] = useState(1);
     //la funzione riceve il nome della colonna cliccata
     function handleSort(column) {
@@ -60,6 +62,16 @@ export function TaskList() {
                     return new Date(b.createdAt) - new Date(a.createdAt);
                 }
             }
+            //se clicco sulla colonna important
+            if (sortBy === 'important') {
+                //se l'ordine attuale é crescente, quindi 1, ordina in modo crescente
+                if (sortOrder === 1) {
+                    return a.important - b.important;
+                    //altrimenti, in ordine decrescente
+                } else {
+                    return b.important - a.important;
+                }
+            }
             //se per qualche motivo nessuna condizione è vera, lascia l'ordine così come sta
             return 0;
         });
@@ -79,6 +91,7 @@ export function TaskList() {
                     <thead className="table-header">
                         <tr>
                             {/* handleSort non sa da sola quale colonna è stata cliccata. Serve un argomento per dirglielo */}
+                            <th className="sortable" onClick={() => handleSort('important')}>Priorità</th>
                             <th className="sortable" onClick={() => handleSort('title')}>Nome</th>
                             <th className="sortable status" onClick={() => handleSort('status')}>Stato</th>
                             <th className="sortable" onClick={() => handleSort('createdAt')}>Data</th>

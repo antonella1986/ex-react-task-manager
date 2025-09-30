@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import star from "../../public/icons/star.svg";
 
 //react eviterà di rirenderizzare il componente se le props (task) non cambiano
 //TaskRow rappresenta una singola riga della tabella, quindi si passa il singolo oggetto task, uno per volta, così ogni riga sa cosa deve mostrare (title, status, data)
@@ -17,6 +18,7 @@ export const TaskRow = React.memo(({ task }) => {
 
     return (
         <tr>
+            <td className="important">{task.important && <img src={star} alt="star" style={{width: '30px'}} />}</td>
             <td className="task task-title"><NavLink to={`/task/${task.id}`}>{task.title}</NavLink></td>
             <td className="task status" style={{ color: statusColor }}>{task.status}</td>
             <td className="task">{new Date(task.createdAt).toLocaleDateString('it-IT', {
