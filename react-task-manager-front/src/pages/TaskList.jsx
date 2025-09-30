@@ -3,7 +3,7 @@ import { useContext, useState, useMemo } from "react";
 import { GlobalContext } from "../contexts/GlobalContext";
 import { TaskRow } from "../components/TaskRow";
 import { SearchBar } from "../components/SearchBar";
-import bean2 from "../../public/icons/bean2.svg";
+import star from "../../public/icons/star.svg";
 
 export function TaskList() {
     //prendo l'array di tutti i task dal file GlobalContext e li rendo leggibili e utilizzabili nel componente tramite useContext
@@ -72,7 +72,7 @@ export function TaskList() {
     return (
         <>
             <div className="task-list">
-                <h1 className="title"><img src={bean2} alt="coffe bean" style={{width: '32px', paddingRight: '1.1rem'}} />Lista dei task<img src={bean2} alt="coffe bean" style={{width: '32px', paddingLeft: '1rem'}} /></h1>
+                <h1 className="title"><img src={star} alt="star icon" style={{width: '32px', paddingRight: '1.1rem'}} />LISTA DEI TASK<img src={star} alt="star icon" style={{width: '32px', paddingLeft: '1rem'}} /></h1>
                 <h2>Cerca un task</h2>
                 <SearchBar />
                 <table>
