@@ -72,7 +72,7 @@ export function TaskList() {
     return (
         <>
             <div className="task-list">
-                <h1 className="title"><img src={bean2} alt="coffe bean" style={{width: '32px', paddingRight: '1.1rem'}} />Task list<img src={bean2} alt="coffe bean" style={{width: '32px', paddingLeft: '0.5rem'}} /></h1>
+                <h1 className="title"><img src={bean2} alt="coffe bean" style={{width: '32px', paddingRight: '1.1rem'}} />Lista dei task<img src={bean2} alt="coffe bean" style={{width: '32px', paddingLeft: '1rem'}} /></h1>
                 <h2>Cerca un task</h2>
                 <SearchBar />
                 <table>
@@ -80,8 +80,8 @@ export function TaskList() {
                         <tr>
                             {/* handleSort non sa da sola quale colonna è stata cliccata. Serve un argomento per dirglielo */}
                             <th className="sortable" onClick={() => handleSort('title')}>Nome</th>
-                            <th className="sortable" onClick={() => handleSort('status')}>Stato</th>
-                            <th className="sortable" onClick={() => handleSort('createdAt')}>Data di creazione</th>
+                            <th className="sortable status" onClick={() => handleSort('status')}>Stato</th>
+                            <th className="sortable" onClick={() => handleSort('createdAt')}>Data</th>
                         </tr>
                     </thead>
                     <tbody>

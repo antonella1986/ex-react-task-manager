@@ -18,7 +18,7 @@ export const TaskRow = React.memo(({ task }) => {
     return (
         <tr>
             <td className="task task-title"><NavLink to={`/task/${task.id}`}>{task.title}</NavLink></td>
-            <td className="task" style={{ color: statusColor }}>{task.status}</td>
+            <td className="task status" style={{ color: statusColor }}>{task.status}</td>
             <td className="task">{new Date(task.createdAt).toLocaleDateString('it-IT', {
                 day: '2-digit',
                 month: '2-digit',

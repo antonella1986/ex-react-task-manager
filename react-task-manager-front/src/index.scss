@@ -6,6 +6,7 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Electrolize&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 :root {
   --primary: rgb(222, 0, 222);
@@ -29,7 +30,7 @@ a {
 body {
   background: url('./background2.png') no-repeat center center !important;
   background-size: cover !important;
-  font-family: "Arcade Classic" !important;
+  font-family: "Press Start 2P" !important;
   margin: 0;
   box-sizing: border-box;
   display: flex;
@@ -73,8 +74,8 @@ body::before {
 }
 
 h1 {
-  font-size: 3rem;
-  line-height: 1.1;
+  font-size: 30px;
+  line-height: 1.5;
   color: var(--light);
   text-align: center;
   margin-top: 0;
@@ -88,7 +89,7 @@ h1 {
   justify-content: center;
   text-align: center;
   gap: 3rem;
-  font-size: 24px;
+  font-size: 12px;
   margin-bottom: 3rem;
 }
 
@@ -107,7 +108,7 @@ h1 {
   padding: 0.6em 1.2em;
   font-size: 1.25rem;
   font-weight: 600;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Electrolize', sans-serif;
   background-color: var(--primary);
   cursor: pointer;
   transition: border-color 0.25s;
@@ -147,9 +148,9 @@ h1 {
 .menu-sx {
   display: flex;
   align-items: center;
-  gap: 3rem;
+  gap: 4rem;
   padding-left: 5rem;
-  font-size: 24px;
+  font-size: 16px;
 }
 
 .menu-dx {
@@ -188,12 +189,12 @@ li {
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 1rem;
   line-height: 1.1;
   color: var(--light);
   text-align: center;
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .search-bar {
@@ -216,11 +217,16 @@ h2 {
   padding-top: 1rem;
   color: var(--primary);
   text-align: left;
-  font-size: 24px;
+  font-size: 16px;
 }
 
-.task-title:hover {
-  color: var(--accent);
+.status {
+  padding-right: 1rem;
+}
+
+table {
+  width: 100%;
+  border-spacing: 1rem 0.5rem;
 }
 
 tr {
@@ -230,17 +236,18 @@ tr {
 
 td {
   padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-bottom: 0.5rem;
   padding-right: 2rem;
   border-bottom: 1px solid var(--primary);
 }
 
+.task-title:hover {
+  cursor: pointer;
+  color: var(--accent);
+}
+
 .task {
   font-family: 'Electrolize', sans-serif;
-  cursor: pointer;
-  &:hover {
-    color: var(--accent);
-  }
 }
 
 .button-add {
@@ -256,6 +263,9 @@ td {
   cursor: pointer;
   &:active {
     border: 2px inset;
+  }
+  &:hover {
+    color: var(--light);
   }
 }
 
