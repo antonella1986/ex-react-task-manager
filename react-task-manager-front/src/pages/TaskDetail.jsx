@@ -1,4 +1,4 @@
-import { useNavigate, useParams, NavLink } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useContext, useState } from "react"
 import { GlobalContext } from "../contexts/GlobalContext"
 import { Modal } from "../components/Modal"
@@ -17,15 +17,6 @@ export function TaskDetail() {
 
     if (!task) return <p>Task non trovato</p>;
 
-    let statusColor = "";
-    if (task.status === "To do") {
-        statusColor = "red";
-    } else if (task.status === "Doing") {
-        statusColor = "yellow";
-    } else {
-        statusColor = "green";
-    }
-
     const handleDelete = async () => {
         try {
             //"aspetta che io comunichi con il backend e cancelli il task con questo id (rispondendo al frontend { success: true }). Dopo il frontend aggiorna lo stato locale con setTasks(). Completato questo con successo, passo alla riga successiva."
@@ -40,13 +31,12 @@ export function TaskDetail() {
 
     return (
         <div>
-            <NavLink to="/"><h1>Homepage</h1></NavLink>
             <h3>Nome</h3>
             <p>{task.title}</p>
             <h4>Descrizione</h4>
             <p>{task.description}</p>
             <h4>Status</h4>
-            <p style={{ color: statusColor }}>{task.status}</p>
+            <p>{task.status}</p>
             <h4>Data di creazione</h4>
             <p>{new Date(task.createdAt).toLocaleDateString('it-IT', {
                 day: '2-digit',

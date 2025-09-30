@@ -68,22 +68,23 @@ export function useTasks() {
         }
     };
     
-    //FUNZIONE PER FILTRARE I TASK IN BASE A IL TESTO DIGITATO NELLA RICERCA
+    //FUNZIONE PER FILTRARE I TASK IN BASE AL TESTO DIGITATO NELLA RICERCA
     const filteredTask = useMemo(() => {
         return tasks.filter(task =>
             task.title.toLowerCase().includes(query.toLowerCase())
         );
+    //se ad esempio viene aggiunto un task, il filtro si ricalcola per includere il nuovo task se corrisponde alla query attuale
     }, [tasks, query]);
 
     //FUNZIONE DEBOUNCE LEGATA AL FILTRAGGIO TASK
-    //useCallback: per evitare che debounce venga ricreata ogni volta che viene digitato qualcosa
     const debounceSearch = useCallback(
+        //useCallback: per evitare che debounce venga ricreata ogni volta che viene digitato qualcosa
         //value è ciò che l'utente scrive sul campo di ricerca. funzione: primo argomento di useCallback
         //dopo 1 secondo dalla digitazione...
         debounce((value) => {
             //...viene chiamata setQuery che aggiorna lo stato query con il testo digitato dall'utente (tecnicamente è la chiamata a setQuery che provoca un nuovo render)
             setQuery(value);
-        }, 1000),
+        }, 300),
     //secondo argomento di useCallback
     []);
 

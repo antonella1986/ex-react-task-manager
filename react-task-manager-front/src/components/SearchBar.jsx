@@ -1,12 +1,14 @@
-import { useTasks } from "../hooks/useTasks";
+import { useContext } from "react";
+import { GlobalContext } from "../contexts/GlobalContext";
 
 export function SearchBar() {
-  const { debounceSearch } = useTasks();
+  const { debounceSearch } = useContext(GlobalContext);
 
   return (
     <input
       type="text"
-      placeholder="Cerca un task"
+      className="search-bar"
+      placeholder="Cerca per nome..."
       onChange={(e) => debounceSearch(e.target.value)}
     />
   );

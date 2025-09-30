@@ -1,0 +1,267 @@
+@font-face {
+  font-family: 'Arcade Classic';
+  src: url('./assets/fonts/ARCADECLASSIC.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Electrolize&display=swap');
+
+:root {
+  --primary: rgb(222, 0, 222);
+  --accent: rgb(0, 240, 179);
+  --dark: rgb(51, 0, 102);
+  --light: rgb(255, 255, 255);
+  //task status
+  --green: rgb(21, 255, 0);
+  --red: rgb(255, 0, 0);
+  --yellow: rgb(242, 255, 0);
+}
+
+a {
+  text-decoration: inherit;
+  color: var(--light);
+  &:hover {
+    color: var(--accent);
+  }
+}
+
+body {
+  background: url('./background2.png') no-repeat center center !important;
+  background-size: cover !important;
+  font-family: "Arcade Classic" !important;
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+body::before {
+  content: "";
+  position: fixed; //per coprire tutto lo schermo
+  inset: 0; //per coprire tutto lo schermo
+  z-index: -1;
+  background: rgba(24, 0, 48, 0.85);
+  pointer-events: none;
+}
+
+/* #region HOME */
+
+.homepage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  width: 500px;
+  height: 360px;
+  background-image: url('./homepage.png');
+  background-size: cover;
+  border: 20px solid rgb(0, 240, 179);
+  position: relative;
+  overflow: hidden;
+  margin-top: 3rem;
+    &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(24, 0, 48, 0.8);
+    z-index: 0;
+    pointer-events: none;
+  }
+}
+
+h1 {
+  font-size: 3rem;
+  line-height: 1.1;
+  color: var(--light);
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 4rem;
+  z-index: 2;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 3rem;
+  font-size: 24px;
+  margin-bottom: 3rem;
+}
+
+.menu a {
+  position: relative;
+  text-decoration: inherit;
+  color: var(--light);
+  &:hover {
+    color: var(--accent);
+    transition: border-color 0.25s;
+  }
+}
+
+.button-list {
+  border: none;
+  padding: 0.6em 1.2em;
+  font-size: 1.25rem;
+  font-weight: 600;
+  font-family: 'Courier New', Courier, monospace;
+  background-color: var(--primary);
+  cursor: pointer;
+  transition: border-color 0.25s;
+  z-index: 2;
+}
+.button-text:hover {
+  color: var(--accent);
+  font-weight: 900;
+}
+
+/* #endregion HOME */
+
+/* #region HEADER */
+
+.logo-space {
+  display: flex;
+  align-items: center;
+}
+
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 2rem;
+}
+
+.menu-sx {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  padding-left: 5rem;
+  font-size: 24px;
+}
+
+.menu-dx {
+  display: flex;
+  align-items: center;
+}
+
+li {
+  list-style-type: none;
+}
+
+.hearth-icon {
+  cursor: pointer;
+  align-items: center;
+}
+
+/* #endregion HEADER */
+
+/* #region TASKLIST/TASKROW */
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  margin-top: 10rem;
+}
+
+.title {
+  margin-bottom: 3rem;
+  display: flex;
+  align-items: center;
+  color: var(--primary);
+}
+
+h2 {
+  font-size: 2rem;
+  line-height: 1.1;
+  color: var(--light);
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.search-bar {
+  width: 16rem;
+  border: none;
+  display: flex;
+  padding: 0.75rem;
+  margin-bottom: 3rem;
+  font-family: 'Electrolize', sans-serif;
+  color: var(--dark);
+  &:focus {
+    outline: none;
+    border: 1px solid var(--accent);
+  }
+}
+
+.sortable {
+  cursor: pointer;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  color: var(--primary);
+  text-align: left;
+  font-size: 24px;
+}
+
+.task-title:hover {
+  color: var(--accent);
+}
+
+tr {
+  color: var(--light);
+  font-size: 20px;
+}
+
+td {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-right: 2rem;
+  border-bottom: 1px solid var(--primary);
+}
+
+.task {
+  font-family: 'Electrolize', sans-serif;
+  cursor: pointer;
+  &:hover {
+    color: var(--accent);
+  }
+}
+
+.button-add {
+  margin-bottom: 5rem;
+  margin-top: 3rem;
+  border: none;
+  text-align: center;
+  padding: 0.75rem;
+  font-family: 'Arcade Classic';
+  background-color: var(--accent);
+  border: 2px outset;
+  outline: none;
+  cursor: pointer;
+  &:active {
+    border: 2px inset;
+  }
+}
+
+.button-add a {
+  color: var(--dark) !important;
+  font-size: 24px;
+}
+
+/* #endregion TASKLIST/TASKROW */
