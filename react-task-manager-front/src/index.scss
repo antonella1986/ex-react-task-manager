@@ -234,26 +234,31 @@ tr {
   font-size: 20px;
 }
 
-td {
-  padding-top: 1rem;
-  padding-bottom: 0.5rem;
-  padding-right: 2rem;
-  border-bottom: 1px solid var(--primary);
-}
-
 .task-title:hover {
   cursor: pointer;
   color: var(--accent);
 }
 
 .task {
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+  padding-right: 2rem;
+  border-bottom: 1px solid var(--primary);
   font-family: 'Electrolize', sans-serif;
 }
 
-.important {
+.important-td {
   border: none;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1rem;
+}
+
+.important-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
 .button-add {
@@ -281,3 +286,9 @@ td {
 }
 
 /* #endregion TASKLIST/TASKROW */
+
+/* #region TASKDETAIL */
+
+
+
+/* #endregion TASKDETAIL */

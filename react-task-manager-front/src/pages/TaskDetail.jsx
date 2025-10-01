@@ -2,6 +2,8 @@ import { useNavigate, useParams } from "react-router-dom"
 import { useContext, useState } from "react"
 import { GlobalContext } from "../contexts/GlobalContext"
 import { Modal } from "../components/Modal"
+import star from "../../public/icons/star.svg"
+import star_empty from "../../public/icons/star_empty.svg"
 
 export function TaskDetail() {
     //useParams mi fornisce l'id del task
@@ -14,6 +16,8 @@ export function TaskDetail() {
     //accedo alla funzione removeTask che si trova nel contesto
     const { removeTask } = useContext(GlobalContext);
     const [showModal, setShowModal] = useState(false);
+    //importo toggleImportant
+    const { toggleImportant } = useContext(GlobalContext);
 
     if (!task) return <p>Task non trovato</p>;
 
@@ -43,6 +47,9 @@ export function TaskDetail() {
                 month: '2-digit',
                 year: 'numeric'
             })}</p>
+            <button onClick={() => toggleImportant(task.id)} className="important-button">
+                {task.important ? <img src={star} alt="Segna come non importante" style={{width: '30px'}} />  : <img src={star_empty} alt="Segna come importante" style={{width: '30px'}} />}
+            </button>
             <button onClick={() => setShowModal(true)}>Elimina task</button>
             <Modal
                 show={showModal}

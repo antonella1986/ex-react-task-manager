@@ -8,7 +8,7 @@ import star from "../../public/icons/star.svg";
 export function TaskList() {
     //prendo l'array di tutti i task dal file GlobalContext e li rendo leggibili e utilizzabili nel componente tramite useContext
     //se stampo, vedo un array di oggetti (id, title...)
-    const { filteredTask } = useContext(GlobalContext);
+    const { filteredTask, toggleImportant } = useContext(GlobalContext);
 
     //sortBy corrisponde all'elemento attualmente cliccato
     const [sortBy, setSortBy] = useState('createdAt');
@@ -99,7 +99,7 @@ export function TaskList() {
                     </thead>
                     <tbody>
                         {sortedTasks.map(task =>
-                            <TaskRow key={task.id} task={task} />
+                            <TaskRow key={task.id} task={task} toggleImportant={toggleImportant} />
                         )}
                     </tbody>
                 </table>

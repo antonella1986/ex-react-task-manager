@@ -76,6 +76,12 @@ export function useTasks() {
     //se ad esempio viene aggiunto un task, il filtro si ricalcola per includere il nuovo task se corrisponde alla query attuale
     }, [tasks, query]);
 
+    //FUNZIONE PER AGGIUNGERE LA STELLINA AL TASK PER MARCARNE L'IMPORTANZA
+    function toggleImportant(id) {
+        //faccio un map dei task, e per ogni task, se l'id corrisponde all'id del task attuale, lo aggiorno con la nuova proprietà important
+        setTasks(tasks.map(task => task.id === id ? { ...task, important: !task.important } : task));
+    }
+
     //FUNZIONE DEBOUNCE LEGATA AL FILTRAGGIO TASK
     const debounceSearch = useCallback(
         //useCallback: per evitare che debounce venga ricreata ogni volta che viene digitato qualcosa
@@ -89,7 +95,7 @@ export function useTasks() {
     []);
 
     //queste funzioni sono contenute dentro tasksData associato all'hook useTasks dentro il contesto
-    return { tasks, setTasks, addTask, removeTask, filteredTask, query, setQuery, debounceSearch };
+    return { tasks, setTasks, addTask, removeTask, filteredTask, query, setQuery, toggleImportant, debounceSearch };
 }
 
 
