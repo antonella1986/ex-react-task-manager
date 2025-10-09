@@ -15,6 +15,7 @@ export function TaskDetail() {
     const task = tasks.find(t => t.id.toString() === id)
     //accedo alla funzione removeTask che si trova nel contesto
     const { removeTask } = useContext(GlobalContext);
+    //imposto lo useState per aggiornare lo stato della modale
     const [showModal, setShowModal] = useState(false);
     //importo toggleImportant
     const { toggleImportant } = useContext(GlobalContext);
@@ -61,7 +62,7 @@ export function TaskDetail() {
                 <div className="task-detail-priority">
                     <h3>Priorità</h3>
                     <button onClick={() => toggleImportant(task.id)} className="important-button">
-                        {task.important ? <img src={star} alt="Segna come non importante" className="star-img"/>  : <img src={star_empty} alt="Segna come importante" className="star-img"/>}
+                        {task.important ? <img src={star} aria-label="Segna come non importante" className="star-img"/>  : <img src={star_empty} aria-label="Segna come importante" className="star-img"/>}
                     </button>
                 </div>
             </div>
@@ -69,11 +70,11 @@ export function TaskDetail() {
                 <button onClick={() => setShowModal(true)} className="button-delete">ELIMINA TASK</button>
                 <Modal
                     show={showModal}
-                    title="Conferma eliminazione"
-                    content="Sei sicuro di voler eliminare questo task?"
+                    title="Vuoi davvero eliminare questo task?"
+                    content="E se poi te ne penti?"
                     onClose={() => setShowModal(false)}
                     onConfirm={handleDelete}
-                    confirmText="Elimina"
+                    confirmText="ELIMINA"
                 />
             </div>
         </div>
