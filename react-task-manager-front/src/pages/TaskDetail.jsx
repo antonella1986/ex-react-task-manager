@@ -34,31 +34,48 @@ export function TaskDetail() {
 
 
     return (
-        <div>
-            <h3>Nome</h3>
-            <p>{task.title}</p>
-            <h4>Descrizione</h4>
-            <p>{task.description}</p>
-            <h4>Status</h4>
-            <p>{task.status}</p>
-            <h4>Data di creazione</h4>
-            <p>{new Date(task.createdAt).toLocaleDateString('it-IT', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric'
-            })}</p>
-            <button onClick={() => toggleImportant(task.id)} className="important-button">
-                {task.important ? <img src={star} alt="Segna come non importante" style={{width: '30px'}} />  : <img src={star_empty} alt="Segna come importante" style={{width: '30px'}} />}
-            </button>
-            <button onClick={() => setShowModal(true)}>Elimina task</button>
-            <Modal
-                show={showModal}
-                title="Conferma eliminazione"
-                content="Sei sicuro di voler eliminare questo task?"
-                onClose={() => setShowModal(false)}
-                onConfirm={handleDelete}
-                confirmText="Elimina"
-            />
+        <div className="task-detail">
+            <div className="task-detail-container1">
+                <div className="task-detail-name">
+                    <h3>Nome</h3>
+                    <p>{task.title}</p>
+                </div>
+                <div className="task-detail-description">
+                    <h3>Descrizione</h3>
+                    <p>{task.description}</p>
+                </div>
+            </div>
+            <div className="task-detail-container2">
+                <div className="task-detail-status">
+                    <h3>Status</h3>
+                    <p>{task.status}</p>
+                </div>
+                <div className="task-detail-date">
+                    <h3>Data di creazione</h3>
+                    <p>{new Date(task.createdAt).toLocaleDateString('it-IT', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric'
+                    })}</p>
+                </div>
+                <div className="task-detail-priority">
+                    <h3>Priorità</h3>
+                    <button onClick={() => toggleImportant(task.id)} className="important-button">
+                        {task.important ? <img src={star} alt="Segna come non importante" className="star-img"/>  : <img src={star_empty} alt="Segna come importante" className="star-img"/>}
+                    </button>
+                </div>
+            </div>
+            <div className="task-detail-actions">
+                <button onClick={() => setShowModal(true)} className="button-delete">ELIMINA TASK</button>
+                <Modal
+                    show={showModal}
+                    title="Conferma eliminazione"
+                    content="Sei sicuro di voler eliminare questo task?"
+                    onClose={() => setShowModal(false)}
+                    onConfirm={handleDelete}
+                    confirmText="Elimina"
+                />
+            </div>
         </div>
     )
 }

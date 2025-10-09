@@ -19,21 +19,37 @@ export const TaskRow = React.memo(({ task, toggleImportant }) => {
 
     return (
         <tr>
-            <td className="important-td">
-                <button onClick={() => toggleImportant(task.id)} className="important-button">
-                    {task.important ? <img src={star} alt="Segna come non importante" style={{width: '30px'}} /> : <img src={star_empty} alt="Segna come importante" style={{width: '30px'}} />}
-                </button>
-            </td>
             <td className="task task-title"><NavLink to={`/task/${task.id}`}>{task.title}</NavLink></td>
             <td className="task status" style={{ color: statusColor }}>{task.status}</td>
-            <td className="task">{new Date(task.createdAt).toLocaleDateString('it-IT', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric'
-                })}
+            <td className="important-td">
+                <button onClick={() => toggleImportant(task.id)} className="important-button">
+                {task.important ? <img src={star} alt="Segna come non importante" style={{width: '30px'}} /> : <img src={star_empty} alt="Segna come importante" style={{width: '30px'}} />}
+                </button>
             </td>
         </tr>
     );
 })
 
 /* {task.important && <img src={star} alt="star" style={{width: '30px'}} />} */
+
+
+
+
+
+
+/* import auntie from 'family'
+
+function smartBoy() {
+    return {
+        brain: '🚀',
+        hearth: '❤️',
+        powerSource: auntie
+    }
+}
+
+console.log(smartBoy()) */
+
+
+
+
+

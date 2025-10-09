@@ -78,7 +78,7 @@ export function useTasks() {
 
     //FUNZIONE PER AGGIUNGERE LA STELLINA AL TASK PER MARCARNE L'IMPORTANZA
     function toggleImportant(id) {
-        //faccio un map dei task, e per ogni task, se l'id corrisponde all'id del task attuale, lo aggiorno con la nuova proprietà important
+        //faccio un map dei task, e per ogni task, se l'id corrisponde all'id del task attuale, ALLORA lo aggiorno con la nuova proprietà 'important' (da true a false e viceversa), ALTRIMENTI lo lascio invariato
         setTasks(tasks.map(task => task.id === id ? { ...task, important: !task.important } : task));
     }
 

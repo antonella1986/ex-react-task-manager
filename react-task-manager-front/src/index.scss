@@ -160,6 +160,7 @@ h1 {
 
 li {
   list-style-type: none;
+  line-height: 1.5rem;
 }
 
 .hearth-icon {
@@ -201,14 +202,27 @@ h2 {
   width: 16rem;
   border: none;
   display: flex;
-  padding: 0.75rem;
   margin-bottom: 3rem;
   font-family: 'Electrolize', sans-serif;
   color: var(--dark);
+  padding: 0.6rem 1rem 0.6rem 0.6rem;
   &:focus {
     outline: none;
     border: 1px solid var(--accent);
   }
+}
+
+.search-bar-container {
+  position: relative;
+  display: inline-block;
+}
+
+.search-icon {
+  position: absolute;
+  right: 4%;
+  top: 21%;
+  transform: translateY(-50%);
+  pointer-events: none; /* così l’icona non blocca il click sull’input */
 }
 
 .sortable {
@@ -220,13 +234,13 @@ h2 {
   font-size: 16px;
 }
 
-.status {
-  padding-right: 1rem;
+.sort-icon {
+  padding-left: 0.5rem;
 }
 
 table {
   width: 100%;
-  border-spacing: 1rem 0.5rem;
+  border-spacing: 2.5rem 1rem;
 }
 
 tr {
@@ -267,7 +281,7 @@ tr {
   border: none;
   text-align: center;
   padding: 0.75rem;
-  font-family: 'Arcade Classic';
+  font-family: 'Press Start 2P';
   background-color: var(--accent);
   border: 2px outset;
   outline: none;
@@ -282,13 +296,102 @@ tr {
 
 .button-add a {
   color: var(--dark) !important;
-  font-size: 24px;
+  font-size: 16px;
 }
 
 /* #endregion TASKLIST/TASKROW */
 
 /* #region TASKDETAIL */
 
+h3 {
+  color: var(--primary);
+}
 
+p {
+  color: var(--light);
+  font-family: 'Electrolize', sans-serif;
+}
+
+.task-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  position: relative;
+  overflow: hidden;
+  margin-top: 5rem;
+}
+
+.task-detail-container1 {
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+  gap: 5rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 3rem;
+}
+
+.task-detail-name, .task-detail-description, .task-detail-date, .task-detail-status, .task-detail-priority {
+  border-bottom: 1px solid var(--primary);
+}
+
+.task-detail-priority {
+  padding-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.task-detail-priority img {
+  display: flex;
+  justify-content: center;
+}
+
+.task-detail-container2 {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  gap: 5rem;
+}
+
+.task-detail-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 5rem;
+}
+
+.important-button {
+  padding: 0;
+}
+
+.star-img {
+  width: 30px;
+  cursor: pointer;
+}
+
+.button-delete {
+  margin-bottom: 5rem;
+  border: none;
+  text-align: center;
+  padding: 0.75rem;
+  font-family: 'Press Start 2P';
+  background-color: var(--red);
+  color: var(--light);
+  border: 2px outset;
+  outline: none;
+  cursor: pointer;
+  &:active {
+    border: 2px inset;
+  }
+  &:hover {
+    color: var(--dark);
+  }
+}
+
+.button-delete a {
+  color: var(--dark) !important;
+  font-size: 16px;
+}
 
 /* #endregion TASKDETAIL */

@@ -12,10 +12,10 @@ export default function Header() {
                 <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
                     <ul className="menu-sx">
                         <li>
-                            <Link className="menu-link" to={'/TaskList'}>LISTA DEI TASK</Link>
+                            <Link className="menu-link" to={'/TaskList'}>LISTA TASK</Link>
                         </li>
                         <li>
-                            <Link className="menu-link" to={'/AddTask'}>AGGIUNGI NUOVO TASK</Link>
+                            <Link className="menu-link" to={'/AddTask'}>AGGIUNGI TASK</Link>
                         </li>
                     </ul>
                 </div>

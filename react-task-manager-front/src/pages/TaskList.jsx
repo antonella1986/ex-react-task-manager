@@ -4,6 +4,9 @@ import { GlobalContext } from "../contexts/GlobalContext";
 import { TaskRow } from "../components/TaskRow";
 import { SearchBar } from "../components/SearchBar";
 import star from "../../public/icons/star.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
+
 
 export function TaskList() {
     //prendo l'array di tutti i task dal file GlobalContext e li rendo leggibili e utilizzabili nel componente tramite useContext
@@ -85,16 +88,14 @@ export function TaskList() {
         <>
             <div className="task-list">
                 <h1 className="title"><img src={star} alt="star icon" style={{width: '32px', paddingRight: '1.1rem'}} />LISTA DEI TASK<img src={star} alt="star icon" style={{width: '32px', paddingLeft: '1rem'}} /></h1>
-                <h2>Cerca un task</h2>
                 <SearchBar />
                 <table>
                     <thead className="table-header">
                         <tr>
                             {/* handleSort non sa da sola quale colonna è stata cliccata. Serve un argomento per dirglielo */}
-                            <th className="sortable" onClick={() => handleSort('important')}>Priorità</th>
-                            <th className="sortable" onClick={() => handleSort('title')}>Nome</th>
-                            <th className="sortable status" onClick={() => handleSort('status')}>Stato</th>
-                            <th className="sortable" onClick={() => handleSort('createdAt')}>Data</th>
+                            <th className="sortable" onClick={() => handleSort('title')}>Nome<FontAwesomeIcon icon={faChevronUp} className="sort-icon" /></th>
+                            <th className="sortable status" onClick={() => handleSort('status')}>Stato<FontAwesomeIcon icon={faChevronUp} className="sort-icon" /></th>
+                            <th className="sortable" onClick={() => handleSort('important')}>Priorità<FontAwesomeIcon icon={faChevronUp} className="sort-icon"/></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -103,7 +104,7 @@ export function TaskList() {
                         )}
                     </tbody>
                 </table>
-                <button className="button-add"><NavLink to={"/AddTask"}>Aggiungi un nuovo task</NavLink></button>
+                <button className="button-add"><NavLink to={"/AddTask"}>AGGIUNGI NUOVO TASK</NavLink></button>
             </div>
         </>
     );
